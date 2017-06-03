@@ -50,9 +50,10 @@ table {
 }
 
 .chat {
-    border: 2px solid black;
+    border: 2px solid green;
     margin: 10px;
-    text-align: left
+    text-align: left;
+    align: right;
 }
 
 .chat h2 {
@@ -93,11 +94,10 @@ table {
 }
 
 .challenges {
-    position: absolute;
+    
     border: 1px solid green;
     border-radius: 5px;
-    padding: 5px;
-    margin: 10px;
+    align: center;
     font-size: smaller;
     cursor: default;
 }
