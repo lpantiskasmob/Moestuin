@@ -28,8 +28,7 @@ table {
 
 .challenges {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    align:right;
     border: 1px solid green;
     border-radius: 5px;
     padding: 5px;
