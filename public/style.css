@@ -15,6 +15,12 @@ html, body {
     text-align: center;
 }
 
+body {
+    background-image: url(img/background.png);
+    background-size: cover;
+    background-position: center;
+}
+
 table {
     margin: 0 auto;
     clear: both;
@@ -54,6 +60,7 @@ table {
     margin: 10px;
     text-align: left;
     align: right;
+    background-color: rgba(255,255,255, 0.8);
 }
 
 .chat h2 {
@@ -94,12 +101,12 @@ table {
 }
 
 .challenges {
-    
     border: 1px solid green;
     border-radius: 5px;
     align: center;
     font-size: smaller;
     cursor: default;
+    background-color: rgba(255,255,255,0.8);
 }
 
 @keyframes wiggle {
