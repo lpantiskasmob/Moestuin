@@ -28,6 +28,11 @@ app.get('/', function(req, res, next) {
 
 app.use('/users', users);
 
+app.get('/reward', function(req, res) {
+  res.json('Reward verstuurd');
+  io.emit('reward');
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

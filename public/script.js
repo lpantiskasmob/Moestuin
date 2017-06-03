@@ -51,8 +51,7 @@ function grow() {
 }
 
 
-
-$('.item').each(function() {
+function seedify() {
     var seed = {
         'seed': true,
         'isWatered': false,
@@ -63,8 +62,8 @@ $('.item').each(function() {
         'grow': grow
     };
     this.seed = seed;
-});
-
+}
+$('.item').each(seedify);
 
 var gieter = {'tool': true, 'element': $('.gieter')};
 var schepje = {'tool': true, 'element': $('.schepje')};
@@ -88,6 +87,13 @@ socket.on('chat message', function(msg){
     li.find('.message').text(msg.text);
     $('.messages').append(li);
 });
+
+socket.on('reward', reward);
+
+function reward() {
+    swal("Challenge complete", "Thanks for helping in our community garden! Here are some onion seeds as a reward", "success")
+    $('.ui').css('display', 'inline')
+}
 
 $('.item').draggable({
     start: function( event, ui) {
