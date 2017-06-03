@@ -36,6 +36,13 @@ table td {
     height: 140px;
 }
 
+.tool {
+    transition: 0.5s transform;
+}
+.gieter.ui-draggable-dragging {
+    transform: translateX(-50px) translateY(-30px) rotateZ(70deg) ;
+}
+
 .challenges {
     position: absolute;
     align:right;

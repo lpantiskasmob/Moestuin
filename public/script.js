@@ -18,10 +18,21 @@ var garden = [
     [null, null, null, null, null]
 ];
 
+var seed = {};
+
 var gieter = {};
 var schepje = {};
 var dragging = null;
 
+
+$('.item').draggable({
+    start: function( event, ui) {
+        dragging = seed;
+    },
+    stop: function(event, ui) {
+        dragging = null;
+    }
+})
 $('.tool').draggable({
     start: function( event, ui ) {
         if(this.classList.contains('gieter')) {
@@ -40,7 +51,11 @@ $('table td').droppable({
         var x = Number.parseInt(this.dataset.x);
         var y = Number.parseInt(this.dataset.y);
 
-        console.log('Drop')
+        // Drop a seed
+        if(dragging === seed) {
+            garden[y][x] = seed;
+            $('.item').draggable( "option", "disabled", true);
+        }
     },
     over: function(event, ui) {
         var x = Number.parseInt(this.dataset.x);
