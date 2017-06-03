@@ -1,9 +1,8 @@
 * {
-
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
-
-        .auto-style1 {
-        }
 
 @font-face {
     font-family: 'titillium';
@@ -17,13 +16,14 @@ html, body {
 }
 
 table {
+    margin: 0 auto;
     clear: both;
     border: 3px double white;
     background-image:url(img/grond.jpg)
 }
 
 table td {
-    border:2px double white;
+    border:0px double white;
 }
 
 .topbar {
@@ -31,9 +31,47 @@ table td {
     justify-content: center;
 }
 
+.container {
+    display: flex;
+}
+
+.chat, .seeds {
+    flex: 2;
+}
+
+.seeds {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+table {
+    flex: 5;
+}
+
+.chat {
+    border: 2px solid black;
+    margin: 10px;
+    text-align: left
+}
+
+.chat .name {
+    font-weight: bold;
+}
+
+.chat li {
+    margin: 5px;
+    font-size: smaller;
+}
+
+.chat input {
+    width: 90%;
+    padding: 5px;
+}
+
 .item, .tool, table td {
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
 }
 
 .tool {
@@ -56,6 +94,7 @@ table td {
     border-radius: 5px;
     padding: 5px;
     margin: 10px;
+    font-size: smaller;
 }
 
 

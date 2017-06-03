@@ -25,20 +25,59 @@ var garden = [
 ];
 
 function isGrown() {
-        return this.grow > 4;
+    return this.isWatered && this.isFertilized;
 }
 
-var seed = {'seed': true, 'grow': 0, 'element': $('.item'), isGrown: isGrown};
+function grow() {
+    this.growLevel += 1;
+    var height = this.element.height();
+    var self = this;
+    if(this.growLevel === 1) {
+        // Sapling
+        this.element
+            .animate({width: 0, height: 0}, function() {self.element.attr('src', 'public/img/sapling.png')})
+            .animate({width: height, height: height});
+    } else if(this.growLevel === 2) {
+        // Full plant
+        var type = self.element.data('type');
+        this.element
+            .animate({width: 0, height: 0}, function() {self.element.attr('src', 'public/img/' + type + '.png')})
+            .animate({width: height, height: height});
+    }
+}
+
+
+
+$('.item').each(function() {
+    var seed = {
+        'seed': true,
+        'isWatered': false,
+        'isFertilized': false,
+        'element': $(this),
+        'isGrown': isGrown,
+        'growLevel': 0,
+        'grow': grow
+    };
+    this.seed = seed;
+});
 
 
 var gieter = {'tool': true, 'element': $('.gieter')};
 var schepje = {'tool': true, 'element': $('.schepje')};
+var mest = {'tool': true, 'element': $('.mest')};
+
 var dragging = null;
 
+// Chatbox
+$('form').on('submit', function(e) {
+    var text = $('.chat input').val();
+    $('.chat input').val('');
+    socket.emit('chat message', text);
+});
 
 $('.item').draggable({
     start: function( event, ui) {
-        dragging = seed;
+        dragging = event.target.seed;
     },
     stop: function(event, ui) {
         dragging = null;
@@ -50,6 +89,8 @@ $('.tool').draggable({
             dragging = gieter;
         } else if(this.classList.contains('schepje')) {
             dragging = schepje;
+        } else if(this.classList.contains('mest')) {
+            dragging = mest;
         }
     },
     stop: function(event, ui) {
@@ -80,25 +121,26 @@ $('table td').droppable({
 
         if(dragging && dragging.tool && garden[y][x] !== null) {
             var tool = dragging;
-            var planted = garden[y][x];
+            var plant = garden[y][x];
 
             if(tool === gieter) {
-                // Grow plant
-                planted.grow += 1;
+                if(!plant.isWatered) {
+                    plant.isWatered = true;
+                    plant.grow();
+                }
+            }
 
-                // Develop plant into tomato?
-                if(planted.grow === 4) {
-                    var height = planted.element.height();
-                    planted.element
-                        .animate({width: 0, height: 0}, function() {planted.element.attr('src', 'public/img/tomaat.png')})
-                        .animate({width: height, height: height});
+            if(tool === mest) {
+                if(!plant.isFertilized) {
+                    plant.isFertilized = true;
+                    plant.grow();
                 }
             }
 
             // Harvest plant
-            if(tool === schepje && planted.isGrown()) {
-                planted.element
-                    .fadeOut(function() {$('.oogst').append(planted.element)})
+            if(tool === schepje && plant.isGrown()) {
+                plant.element
+                    .fadeOut(function() {$('.oogst').append(plant.element)})
                     .fadeIn();
 
             }
