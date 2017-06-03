@@ -18,6 +18,7 @@ html, body {
 body {
     background-image: url(img/background.png);
     background-size: cover;
+    background-attachment: fixed;
     background-position: center;
 }
 
@@ -92,6 +93,30 @@ table {
 
 .gieter.ui-draggable-dragging {
     transform: translateX(-50px) translateY(-30px) rotateZ(70deg) ;
+}
+
+.mest.ui-draggable-dragging {
+    animation: mest_intro .5s 1, mest 1s infinite;
+    animation-delay: 0s, .5s;
+}
+
+@keyframes mest_intro {
+  0% {
+    transform: translateY(0px) rotateZ(0deg);
+  }
+  100% {
+    transform: translateY(-50px) rotateZ(180deg);
+  }
+}
+
+@keyframes mest {
+  0%,
+  100% {
+    transform: translateY(-50px) rotateZ(180deg);
+  }
+  50% {
+    transform: translateY(-60px) rotateZ(180deg);
+  }
 }
 
 .schepje.ui-draggable-dragging {
