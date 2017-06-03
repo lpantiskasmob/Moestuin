@@ -10,4 +10,40 @@ $(".item").draggable({
      snapTolerance: 100
 });
 
-$('.tool').draggable();
+var garden = [
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null]
+];
+
+var gieter = {};
+var schepje = {};
+var dragging = null;
+
+$('.tool').draggable({
+    start: function( event, ui ) {
+        if(this.classList.contains('gieter')) {
+            dragging = gieter;
+        } else if(this.classList.contains('schepje')) {
+            dragging = schepje;
+        }
+    },
+    stop: function(event, ui) {
+        dragging = null;
+    }
+});
+
+$('table td').droppable({
+    drop: function( event, ui ) {
+        var x = Number.parseInt(this.dataset.x);
+        var y = Number.parseInt(this.dataset.y);
+
+        console.log('Drop')
+    },
+    over: function(event, ui) {
+        var x = Number.parseInt(this.dataset.x);
+        var y = Number.parseInt(this.dataset.y);
+    }
+});
