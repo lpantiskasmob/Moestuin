@@ -8,5 +8,12 @@
             border:2px double white;
         }
 
-.page-wrap {align="center"
+@font-face {
+    font-family: 'titillium';
+    src: url(titillium.ttf);
+}
+
+html, body {
+    text-shadow: 0 0 5px #888;
+    font-family: 'titillium';
 }
