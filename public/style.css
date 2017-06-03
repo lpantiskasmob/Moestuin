@@ -5,5 +5,8 @@
 
         .auto-style1 {
             height: 168px;
-            border:1px double black;
+            border:2px double white;
         }
+
+.page-wrap {align="center"
+}
