@@ -75,12 +75,10 @@ $('form').on('submit', function(e) {
 });
 
 socket.on('chat message', function(msg){
-    //$('.messages').append()
     var li = $('<li><span class="name">Paul</span>: <span class="message"></span></li>');
     li.find('.name').text(msg.sender);
     li.find('.message').text(msg.text);
     $('.messages').append(li);
-    //$('#messages').append($('<li>').text(msg));
 });
 
 $('.item').draggable({
