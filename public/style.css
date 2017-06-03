@@ -23,6 +23,7 @@ body {
 }
 
 table {
+    display: block;
     margin: 0 auto;
     clear: both;
     border: 3px double white;
