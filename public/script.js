@@ -114,6 +114,8 @@ $('.tool').draggable({
         }
     },
     stop: function(event, ui) {
+        $(this).css('left', 0);
+        $(this).css('top', 0);
         dragging = null;
     }
 });
