@@ -50,6 +50,12 @@ app.use(function(err, req, res, next) {
 
 var server = http.createServer(app);
 var io = new require('socket.io').listen(server);
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
+
 server.listen(process.env.PORT || '3000');
 
 io.on('connection', function(socket){

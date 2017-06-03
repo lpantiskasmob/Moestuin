@@ -1,8 +1,4 @@
-console.log('Hey!');
-
 var socket = io();
-
-console.log(socket);
 
 $(".item").draggable({
      snap: "table td",
@@ -72,7 +68,19 @@ var dragging = null;
 $('form').on('submit', function(e) {
     var text = $('.chat input').val();
     $('.chat input').val('');
-    socket.emit('chat message', text);
+    socket.emit('chat message', {
+        'sender': window.location.hash.substring(1) || 'Paul',
+        'text': text
+    });
+});
+
+socket.on('chat message', function(msg){
+    //$('.messages').append()
+    var li = $('<li><span class="name">Paul</span>: <span class="message"></span></li>');
+    li.find('.name').text(msg.sender);
+    li.find('.message').text(msg.text);
+    $('.messages').append(li);
+    //$('#messages').append($('<li>').text(msg));
 });
 
 $('.item').draggable({
