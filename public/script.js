@@ -10,6 +10,12 @@ $(".item").draggable({
      snapTolerance: 100
 });
 
+navigator.geolocation.getCurrentPosition(newPosition);
+
+function newPosition(position) {
+    console.log(position);
+}
+
 var garden = [
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -18,10 +24,15 @@ var garden = [
     [null, null, null, null, null]
 ];
 
-var seed = {};
+function isGrown() {
+        return this.grow > 4;
+}
 
-var gieter = {};
-var schepje = {};
+var seed = {'seed': true, 'grow': 0, 'element': $('.item'), isGrown: isGrown};
+
+
+var gieter = {'tool': true, 'element': $('.gieter')};
+var schepje = {'tool': true, 'element': $('.schepje')};
 var dragging = null;
 
 
@@ -52,13 +63,45 @@ $('table td').droppable({
         var y = Number.parseInt(this.dataset.y);
 
         // Drop a seed
-        if(dragging === seed) {
-            garden[y][x] = seed;
-            $('.item').draggable( "option", "disabled", true);
+        if(dragging && dragging.seed) {
+            garden[y][x] = dragging;
+            dragging.element
+                .css('position', 'static')
+                .attr("src", 'public/img/zaad.png')
+                .draggable( "option", "disabled", true);
+            $(this).append(dragging.element);
         }
     },
     over: function(event, ui) {
         var x = Number.parseInt(this.dataset.x);
         var y = Number.parseInt(this.dataset.y);
+
+        //var item = garden[y][x];
+
+        if(dragging && dragging.tool && garden[y][x] !== null) {
+            var tool = dragging;
+            var planted = garden[y][x];
+
+            if(tool === gieter) {
+                // Grow plant
+                planted.grow += 1;
+
+                // Develop plant into tomato?
+                if(planted.grow === 4) {
+                    var height = planted.element.height();
+                    planted.element
+                        .animate({width: 0, height: 0}, function() {planted.element.attr('src', 'public/img/tomaat.png')})
+                        .animate({width: height, height: height});
+                }
+            }
+
+            // Harvest plant
+            if(tool === schepje && planted.isGrown()) {
+                planted.element
+                    .fadeOut(function() {$('.oogst').append(planted.element)})
+                    .fadeIn();
+
+            }
+        }
     }
 });
