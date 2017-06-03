@@ -6,3 +6,4 @@ obj
 *.csproj
 node_modules
 Web.config
+*.csproj.user
