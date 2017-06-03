@@ -1,2 +1,8 @@
+bin
+*.sln
+*.suo
+obj
+*.bak
+*.csproj
 node_modules
 Web.config
