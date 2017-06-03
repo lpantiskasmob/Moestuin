@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -45,4 +46,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+// Setup server
+
+var server = http.createServer(app);
+var io = new require('socket.io').listen(server);
+server.listen(process.env.PORT || '3000');
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
