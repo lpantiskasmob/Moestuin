@@ -103,7 +103,7 @@ function reward() {
 
 function trade() {
     swal("Oleg traded with you", "Oleg traded some olive seeds with you", "success");
-    $('.salade').hide();
+    $('.salade.groen').hide();
     $('.olijf').show();
 }
 
@@ -211,6 +211,15 @@ $('.bowl').droppable({
             $('.salade.groen').show();
             swal("Green salad", "You made a nice green salad and earned some apple seeds!", "success")
             $('.appel').show();
+        }
+
+        if(salad_bowl.length === 2
+            && salad_bowl.some(plant => plant.type === 'ui')
+            && salad_bowl.some(plant => plant.type === 'aardappel')) {
+            empty_salad_bowl();
+            $('.salade.aardappel').show();
+            swal("Potato salad", "You made a nice potato salad and earned some beet seeds", "success")
+            $('.biet').show();
         }
     }
 });
