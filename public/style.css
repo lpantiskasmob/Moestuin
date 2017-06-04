@@ -27,7 +27,7 @@ table {
     margin: 0 auto;
     clear: both;
     border: 3px double white;
-    background-image:url(img/grond.jpg)
+    background-image:url(img/grond.png)
 }
 
 table td {
@@ -83,7 +83,7 @@ table {
     padding: 5px;
 }
 
-.item, .tool, table td {
+.item, .tool, .salade, table td {
     width: 100px;
     height: 100px;
 }
@@ -99,6 +99,14 @@ table {
 .mest.ui-draggable-dragging {
     animation: mest_intro .5s 1, mest 1s infinite;
     animation-delay: 0s, .5s;
+}
+
+.bowl {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-image: url(img/bowl.png);
+    background-position: center;
+    background-size: contain;
 }
 
 @keyframes mest_intro {

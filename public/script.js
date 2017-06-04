@@ -47,6 +47,10 @@ function grow() {
         this.element
             .animate({width: 0, height: 0}, function() {self.element.attr('src', 'public/img/' + type + '.png')})
             .animate({width: height, height: height});
+        $(this.element).draggable({
+            snap: false,
+            disabled: false
+        });
     }
 }
 
@@ -59,7 +63,8 @@ function seedify() {
         'element': $(this),
         'isGrown': isGrown,
         'growLevel': 0,
-        'grow': grow
+        'grow': grow,
+        'type': this.dataset.type
     };
     this.seed = seed;
 }
@@ -95,6 +100,8 @@ function reward() {
     $('.ui').css('display', 'inline')
 }
 
+$('.salade').draggable();
+
 $('.item').draggable({
     start: function( event, ui) {
         dragging = event.target.seed;
@@ -126,10 +133,10 @@ $('table td').droppable({
         var y = Number.parseInt(this.dataset.y);
 
         // Drop a seed
-        if(dragging && dragging.seed) {
+        if(dragging && dragging.seed && !dragging.isGrown()) {
             garden[y][x] = dragging;
             dragging.element
-                .css('position', 'static')
+                .css('left', '0').css('top', 0)
                 .attr("src", 'public/img/zaad.png')
                 .draggable( "option", "disabled", true);
             $(this).append(dragging.element);
@@ -139,12 +146,11 @@ $('table td').droppable({
         var x = Number.parseInt(this.dataset.x);
         var y = Number.parseInt(this.dataset.y);
 
-        //var item = garden[y][x];
-
         if(dragging && dragging.tool && garden[y][x] !== null) {
             var tool = dragging;
             var plant = garden[y][x];
 
+            // Geef plantje water
             if(tool === gieter) {
                 if(!plant.isWatered) {
                     plant.isWatered = true;
@@ -152,6 +158,7 @@ $('table td').droppable({
                 }
             }
 
+            // Bemest plantje
             if(tool === mest) {
                 if(!plant.isFertilized) {
                     plant.isFertilized = true;
@@ -169,3 +176,46 @@ $('table td').droppable({
         }
     }
 });
+
+var salad_bowl = [];
+
+function empty_salad_bowl() {
+    for (plant of salad_bowl) {
+        $(plant.element).remove();
+    }
+    salad_bowl = [];
+}
+
+// Dropping in the salad bowl
+$('.bowl').droppable({
+    drop: function( event, ui ) {
+        ui.helper.css('left', 0).css('top', 0);
+        $(this).append(ui.helper);
+        if(!salad_bowl.includes(ui.helper[0].seed)) {
+            salad_bowl.push(ui.helper[0].seed);
+        }
+
+        // Check if salads can be made
+        if(salad_bowl.length === 3
+            && salad_bowl.some(plant => plant.type === 'sla')
+            && salad_bowl.some(plant => plant.type === 'komkommer')
+            && salad_bowl.some(plant => plant.type === 'tomaat')) {
+            empty_salad_bowl();
+            $('.salade.groen').show();
+            swal("Groene salade", "Je hebt een lekkere groene salade gemaakt! Je hebt appelzaad verdient!", "success")
+            $('.appel').show();
+        }
+    }
+});
+
+$('.oogst').droppable({
+    drop: function(event, ui) {
+        ui.helper.css('left', 0).css('top', 0);
+        $(this).append(ui.helper);
+        salad_bowl = salad_bowl.filter(item => item !== ui.helper[0].seed);
+    }
+});
+
+// Test code appel
+
+
