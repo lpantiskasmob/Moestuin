@@ -31,6 +31,11 @@ app.use('/users', users);
 app.get('/reward', function(req, res) {
   res.json('Reward verstuurd');
   io.emit('reward');
+});
+
+app.get('/trade', function(req, res) {
+  res.json('Trade verstuurd');
+  io.emit('trade');
 })
 
 // catch 404 and forward to error handler

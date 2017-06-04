@@ -94,10 +94,17 @@ socket.on('chat message', function(msg){
 });
 
 socket.on('reward', reward);
+socket.on('trade', trade);
 
 function reward() {
     swal("Challenge complete", "Thanks for helping in our community garden! Here are some onion seeds as a reward", "success")
     $('.ui').css('display', 'inline')
+}
+
+function trade() {
+    swal("Oleg traded with you", "Oleg traded some olive seeds with you", "success");
+    $('.salade').hide();
+    $('.olijf').show();
 }
 
 $('.salade').draggable();
@@ -202,7 +209,7 @@ $('.bowl').droppable({
             && salad_bowl.some(plant => plant.type === 'tomaat')) {
             empty_salad_bowl();
             $('.salade.groen').show();
-            swal("Groene salade", "Je hebt een lekkere groene salade gemaakt! Je hebt appelzaad verdient!", "success")
+            swal("Green salad", "You made a nice green salad and earned some apple seeds!", "success")
             $('.appel').show();
         }
     }
