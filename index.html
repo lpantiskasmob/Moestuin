@@ -27,11 +27,11 @@
           <img src="public/img/tomaat_zaad.png" class="item" data-type="tomaat">
           <img src="public/img/sla_zaad.png" class="item" data-type="sla">
           <img src="public/img/komkommer_zaad.png" class="item" data-type="komkommer">
-          <img src="public/img/ui_zaad.png" class="item ui" data-type="ui" style="display: none">
           <img src="public/img/aardappel_zaad.png" class="item aardappel" data-type="aardappel">
-          <img src="public/img/biet_zaad.png" class="item biet" data-type="biet" style="display: none">
-          <img src="public/img/appel_zaad.png" class="item appel" data-type="appel" style="display: none">
-          <img src="public/img/olijf_zaad.png" class="item olijf" data-type="olijf" style="display: none">
+          <img src="public/img/biet_zaad.png" class="item biet" data-type="biet"">
+
+          <img src="public/img/ui_zaad.png" class="item ui" data-type="ui" style="display: none"> <!-- Reward challenge -->
+          <img src="public/img/appel_zaad.png" class="item appel" data-type="appel" style="display: none"> <!-- Reward salad mixing -->
         </div>
 
         <table align="center">
@@ -97,33 +97,43 @@
 
     <div class="markt">
       <h2>Marketplace</h2>
-      <img src="public/img/olijf_zaad.png" class="item" data-type="olijf" style="display: none;">
+      <img src="public/img/olijf_zaad.png" class="item olijf" data-type="olijf" style="display: none;">
+    </div>
+
+    <div class="chat">
+      <h2>Chat</h2>
+      <ul class="messages">
+        <li><span class="name">Leo:</span> We posted some new challenges, anybody interested?</li>
+        <li><span class="name">Anke:</span> I'm away today, I'll try to do them tomorrow!</li>
+      </ul>
+      <form onsubmit="return false;">
+        <input type="text" class="chatinput">
+      </form>
     </div>
 
     <div class="challenges">
-        <b>Community Garden Challenges:</b><br>
-        <i style="font-size: smaller; ">Help along with in <a href="https://www.google.nl/maps/@51.449489,5.4915794,117a,35y,39.53t/data=!3m1!1e3" target="_blank">our real-life garden!</a></i>
+      <b>Community Garden Challenges:</b><br>
+      <i style="font-size: smaller; ">Help along with in <a href="https://www.google.nl/maps/@51.449489,5.4915794,117a,35y,39.53t/data=!3m1!1e3" target="_blank">our real-life garden!</a></i>
 
-        <ul style="margin-top: 15px">
-          <li>The garden needs watering again</li>
-          <li>Can someone plant pickles in the garden?</li>
-        </ul>
+      <ul style="margin-top: 15px">
+        <li>The garden needs watering again</li>
+        <li>Can someone plant pickles in the garden?</li>
+      </ul>
+    </div>
 
-      </div>
+    <!-- Preloading images -->
+    <img src="public/img/sapling.png" class="preload">
 
-    <div>
-      <h2>
+    <img src="public/img/ui_zaad.png" class="preload">
+    <img src="public/img/appel_zaad.png" class="preload">
 
-        <div class="chat">
-          <h2>Chat</h2>
-          <ul class="messages">
-            <li><span class="name">Paul:</span> We hebben een nieuwe challenge gepost, de tomaten moeten weer water krijgen</li>
-            <li><span class="name">Anke:</span> Tof, ik fiets zo aan om de challenge te halen!</li>
-            <li><span class="name">Paul:</span> Succes!</li>
-          </ul>
-          <form onsubmit="return false;">
-            <input type="text" class="chatinput">
-          </form>
-        </div>
-      </body>
+    <img src="public/img/tomaat.png" class="preload">
+    <img src="public/img/sla.png" class="preload">
+    <img src="public/img/komkommer.png" class="preload">
+    <img src="public/img/aardappel.png" class="preload">
+    <img src="public/img/biet.png"  class="preload">
+    <img src="public/img/ui.png" class="preload">
+    <img src="public/img/appel.png" class="preload">
+
+    </body>
 </html>
